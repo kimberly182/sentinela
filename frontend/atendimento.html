@@ -1,36 +1,164 @@
 <!DOCTYPE html>
-<html>
-<head><link rel="stylesheet" href="style.css"></head>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atendimento</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
 <body>
+
 <div class="container">
-<h2>Atendimento</h2>
+  <h2>Identificação do Paciente</h2>
 
-<input id="nome" placeholder="Nome">
-<input id="cpf" placeholder="CPF">
+  <form id="formAtendimento">
 
-<select id="tipo">
-  <option>Convenio</option>
-  <option>Particular</option>
-</select>
+    <label for="nome">Nome completo</label>
+    <input
+      type="text"
+      id="nome"
+      name="nome"
+      placeholder="Nome completo"
+      required
+    >
 
-<input type="file" id="foto">
+    <label for="documento">CPF / RG ou outro documento</label>
+    <input
+      type="text"
+      id="documento"
+      name="documento"
+      placeholder="CPF, RG ou outro documento"
+      required
+    >
 
-<button onclick="cadastrar()">Cadastrar</button>
+    <label for="dataNascimento">Data de nascimento</label>
+    <input
+      type="date"
+      id="dataNascimento"
+      name="dataNascimento"
+      required
+    >
+
+    <label for="sexo">Sexo</label>
+    <select id="sexo" name="sexo" required>
+      <option value="">Selecione</option>
+      <option value="Feminino">Feminino</option>
+      <option value="Masculino">Masculino</option>
+      <option value="Outro">Outro</option>
+      <option value="Nao informado">Não informado</option>
+    </select>
+
+    <label for="nomeMae">Nome da mãe</label>
+    <input
+      type="text"
+      id="nomeMae"
+      name="nomeMae"
+      placeholder="Nome completo da mãe"
+    >
+
+    <label for="estadoCivil">Estado civil</label>
+    <select id="estadoCivil" name="estadoCivil">
+      <option value="">Selecione</option>
+      <option value="Solteiro">Solteiro(a)</option>
+      <option value="Casado">Casado(a)</option>
+      <option value="Uniao estavel">União estável</option>
+      <option value="Divorciado">Divorciado(a)</option>
+      <option value="Viúvo">Viúvo(a)</option>
+      <option value="Outro">Outro</option>
+    </select>
+
+    <label for="endereco">Endereço</label>
+    <input
+      type="text"
+      id="endereco"
+      name="endereco"
+      placeholder="Rua, número, bairro, cidade e estado"
+    >
+
+    <label for="telefone">Telefone</label>
+    <input
+      type="tel"
+      id="telefone"
+      name="telefone"
+      placeholder="(00) 00000-0000"
+    >
+
+    <label for="email">E-mail</label>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      placeholder="paciente@email.com"
+    >
+
+    <label for="contatoEmergencia">Contato de emergência</label>
+    <input
+      type="text"
+      id="contatoEmergencia"
+      name="contatoEmergencia"
+      placeholder="Nome do contato de emergência"
+    >
+
+    <label for="telefoneEmergencia">Telefone do contato de emergência</label>
+    <input
+      type="tel"
+      id="telefoneEmergencia"
+      name="telefoneEmergencia"
+      placeholder="(00) 00000-0000"
+    >
+
+    <label for="tipo">Tipo de atendimento</label>
+    <select id="tipo" name="tipo" required>
+      <option value="Convenio">Convênio</option>
+      <option value="Particular">Particular</option>
+    </select>
+
+    <label for="foto">Foto do paciente</label>
+    <input
+      type="file"
+      id="foto"
+      name="foto"
+      accept="image/*"
+    >
+
+    <button type="submit">Cadastrar</button>
+
+  </form>
 </div>
 
 <script>
-function cadastrar(){
- fetch("http://localhost:3000/atendimento",{
-  method:"POST",
-  headers:{"Content-Type":"application/json"},
-  body: JSON.stringify({
-    nome: nome.value,
-    cpf: cpf.value,
-    tipo: tipo.value
-  })
- });
- alert("Paciente enviado para triagem");
-}
+document.getElementById("formAtendimento").addEventListener("submit", async function(event) {
+
+  event.preventDefault();
+
+  const form = document.getElementById("formAtendimento");
+  const dados = new FormData(form);
+
+  try {
+
+    const resposta = await fetch("http://localhost:3000/atendimento", {
+      method: "POST",
+      body: dados
+    });
+
+    if (!resposta.ok) {
+      throw new Error("Erro ao cadastrar paciente.");
+    }
+
+    alert("Paciente cadastrado e enviado para triagem.");
+
+    form.reset();
+
+  } catch (erro) {
+
+    console.error(erro);
+    alert("Não foi possível cadastrar o paciente.");
+
+  }
+
+});
 </script>
+
 </body>
 </html>
