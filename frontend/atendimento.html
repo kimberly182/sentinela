@@ -1,60 +1,36 @@
-const express = require("express");
-const multer = require("multer");
-const fs = require("fs");
-const path = require("path");
+<!DOCTYPE html>
+<html>
+<head><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="container">
+<h2>Atendimento</h2>
 
-const app = express();
+<input id="nome" placeholder="Nome">
+<input id="cpf" placeholder="CPF">
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+<select id="tipo">
+  <option>Convenio</option>
+  <option>Particular</option>
+</select>
 
-// Pasta para armazenar as fotos
-const pastaFotos = path.join(__dirname, "fotos");
+<input type="file" id="foto">
 
-if (!fs.existsSync(pastaFotos)) {
-  fs.mkdirSync(pastaFotos, { recursive: true });
+<button onclick="cadastrar()">Cadastrar</button>
+</div>
+
+<script>
+function cadastrar(){
+ fetch("http://localhost:3000/atendimento",{
+  method:"POST",
+  headers:{"Content-Type":"application/json"},
+  body: JSON.stringify({
+    nome: nome.value,
+    cpf: cpf.value,
+    tipo: tipo.value
+  })
+ });
+ alert("Paciente enviado para triagem");
 }
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, pastaFotos);
-  },
-
-  filename: function (req, file, cb) {
-    const extensao = path.extname(file.originalname);
-    cb(null, Date.now() + extensao);
-  }
-});
-
-const upload = multer({ storage: storage });
-
-app.post("/atendimento", upload.single("foto"), (req, res) => {
-
-  const paciente = {
-    id: Date.now(),
-
-    nome: req.body.nome || "",
-    documento: req.body.documento || "",
-    dataNascimento: req.body.dataNascimento || "",
-    sexo: req.body.sexo || "",
-    nomeMae: req.body.nomeMae || "",
-    estadoCivil: req.body.estadoCivil || "",
-    endereco: req.body.endereco || "",
-    telefone: req.body.telefone || "",
-    email: req.body.email || "",
-    contatoEmergencia: req.body.contatoEmergencia || "",
-    telefoneEmergencia: req.body.telefoneEmergencia || "",
-
-    tipo: req.body.tipo || "Particular",
-
-    foto: req.file
-      ? `/fotos/${req.file.filename}`
-      : "",
-
-    status: "triagem",
-
-    createdAt: new Date().toISOString()
-  };
-
-  // Aqui você deve salvar paciente no seu DB/JSON
-});
+</script>
+</body>
+</html>
