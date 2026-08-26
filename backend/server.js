@@ -1,61 +1,50 @@
+const express = require("express");
+const fs = require("fs");
+const path = require("path");
+const cors = require("cors");
+
+const app = express();
+
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
-app.post("/atendimento", (req, res) => {
-  try {
-    const db = lerDB();
+app.use(express.static(path.join(__dirname, "../frontend")));
 
-    const documento = req.body.documento || "";
+const DB_FILE = path.join(__dirname, "db.json");
 
-    const paciente = {
-      id: Date.now(),
-
-      // Identificação
-      nome: req.body.nome || "",
-      cpf: documento,
-      documento: documento,
-      dataNascimento: req.body.dataNascimento || "",
-      sexo: req.body.sexo || "",
-      nomeMae: req.body.nomeMae || "",
-      estadoCivil: req.body.estadoCivil || "",
-
-      // Contato
-      endereco: req.body.endereco || "",
-      telefone: req.body.telefone || "",
-      email: req.body.email || "",
-      contatoEmergencia: req.body.contatoEmergencia || "",
-      telefoneEmergencia: req.body.telefoneEmergencia || "",
-
-      // Atendimento
-      tipo: req.body.tipo || "Particular",
-
-      // Status
-      status: "triagem",
-
-      // Data do cadastro
-      createdAt: new Date().toISOString()
+function readDB() {
+  if (!fs.existsSync(DB_FILE)) {
+    return {
+      usuarios: [],
+      pacientes: [],
+      triagens: [],
+      consultas: [],
+      tv_chamada: null,
+      tv_historico: []
     };
-
-    db.pacientes.push(paciente);
-
-    salvarDB(db);
-
-    console.log("PACIENTE SALVO:");
-    console.log(paciente);
-
-    res.status(201).json({
-      sucesso: true,
-      mensagem: "Paciente cadastrado com sucesso",
-      paciente: paciente
-    });
-
-  } catch (erro) {
-    console.error("ERRO AO SALVAR:", erro);
-
-    res.status(500).json({
-      sucesso: false,
-      mensagem: "Erro ao salvar paciente",
-      erro: erro.message
-    });
   }
+  const db = JSON.parse(fs.readFileSync(DB_FILE));
+  if (!db.tv_chamada) db.tv_chamada = null;
+  if (!db.tv_historico) db.tv_historico = [];
+  return db;
+}
+
+function writeDB(data) {
+  fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2));
+}
+
+// LOGIN
+app.post("/login", (req, res) => {
+  const db = readDB();
+
+  const user = db.usuarios.find(u =>
+    u.usuario === req.body.usuario &&
+    u.senha === req.body.senha
+  );
+
+  if (!user) {
+    return res.status(401).json({ erro: "Login inválido" });
+  }
+
+  res.json(user);
 });
