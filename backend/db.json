@@ -144,6 +144,22 @@
       "tipo": "Convenio",
       "status": "triagem",
       "createdAt": "2026-08-05T14:02:08.417Z"
+    },
+    {
+      "id": 1786536728641,
+      "nome": "Maria dos Remédios Souza",
+      "cpf": "12345678987",
+      "tipo": "Particular",
+      "status": "triagem",
+      "createdAt": "2026-08-12T12:12:08.641Z"
+    },
+    {
+      "id": 1786536756521,
+      "nome": "Maria dos Remédios Souza",
+      "cpf": "12345678987",
+      "tipo": "Particular",
+      "status": "triagem",
+      "createdAt": "2026-08-12T12:12:36.521Z"
     }
   ],
   "triagens": [
@@ -464,26 +480,40 @@
     }
   ],
   "tv_chamada": {
-    "id": "1786537294829",
-    "localTipo": "GUICHÊ",
+    "id": "1786536905345",
+    "localTipo": "CONSULTÓRIO",
     "localNumero": "01",
-    "paciente": "yan",
-    "hora": "09:21"
+    "paciente": "teste",
+    "hora": "09:15"
   },
   "tv_historico": [
     {
-      "id": "1786537294829",
+      "id": "1786536905345",
+      "localTipo": "CONSULTÓRIO",
+      "localNumero": "01",
+      "paciente": "teste",
+      "hora": "09:15"
+    },
+    {
+      "id": "1786536813793",
+      "localTipo": "GUICHÊ",
+      "localNumero": "01",
+      "paciente": "teste08",
+      "hora": "09:13"
+    },
+    {
+      "id": "1786536794553",
       "localTipo": "GUICHÊ",
       "localNumero": "01",
       "paciente": "yan",
-      "hora": "09:21"
+      "hora": "09:13"
     },
     {
-      "id": "1786537291046",
+      "id": "1786536785482",
       "localTipo": "GUICHÊ",
       "localNumero": "01",
-      "paciente": "jesus",
-      "hora": "09:21"
+      "paciente": "",
+      "hora": "09:13"
     },
     {
       "id": "1786452864874",
@@ -491,20 +521,6 @@
       "localNumero": "01",
       "paciente": "test",
       "hora": "09:54"
-    },
-    {
-      "id": "1786449828531",
-      "localTipo": "CONSULTÓRIO",
-      "localNumero": "01",
-      "paciente": "yan",
-      "hora": "09:03"
-    },
-    {
-      "id": "1786360380212",
-      "localTipo": "CONSULTÓRIO",
-      "localNumero": "01",
-      "paciente": "teste",
-      "hora": "08:13"
     }
   ]
 }
