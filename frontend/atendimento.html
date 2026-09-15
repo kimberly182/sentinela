@@ -1,82 +1,197 @@
 <!DOCTYPE html>
 <html>
-<head><link rel="stylesheet" href="style.css"></head>
+<head>
+  <link rel="stylesheet" href="style.css">
+</head>
+
 <body>
+
 <div class="container">
-<h2>Atendimento</h2>
 
-<input id="nome" placeholder="nome completo">
-<input id="cpf" placeholder="CPF">
-<input id="datadeNascimento" type="date" placeholder="Data de datadeNascimento">
+  <h2>Atendimento</h2>
 
-<select id="sexo">
-  <option value="">Selecione o Sexo</option>
-  <option value="M">Masculino</option>
-  <option value="F">Feminino</option>
-  <option value="O">Outro</option>
-</select>
+  <input id="nome" placeholder="nome completo">
 
-<input id="nomeMae" type="text" placeholder="Nome da mãe">
+  <input id="cpf" placeholder="CPF">
 
-<select id="estadoCivil">
-  <option value="">Estado Civil</option>
-  <option value="solteiro">Solteiro(a)</option>
-  <option value="casado">Casado(a)</option>
-  <option value="divorciado">Divorciado(a)</option>
-  <option value="viuvo">Viúvo(a)</option>
-</select>
+  <input id="datadeNascimento" type="date" placeholder="Data de datadeNascimento">
 
-<input id="endereco" placeholder="Endereço">
-<input id="telefone" placeholder="Telefone">
-<input id="email" placeholder="Email">
-<input id="contatodeEmergencia" placeholder="Contato de Emergência">
+  <select id="sexo">
+    <option value="">Selecione o Sexo</option>
+    <option value="M">Masculino</option>
+    <option value="F">Feminino</option>
+    <option value="O">Outro</option>
+  </select>
 
-<select id="tipo">
-  <option>Convênio</option>
-  <option>Particular</option>
-</select>
+  <input id="nomeMae" type="text" placeholder="Nome da mãe">
 
-<!-- ADICIONADO: MOTIVO DA ALTA -->
-<input id="motivoAlta" type="text" placeholder="Motivo da alta do paciente">
+  <select id="estadoCivil">
+    <option value="">Estado Civil</option>
+    <option value="solteiro">Solteiro(a)</option>
+    <option value="casado">Casado(a)</option>
+    <option value="divorciado">Divorciado(a)</option>
+    <option value="viuvo">Viúvo(a)</option>
+  </select>
 
-<input type="file" id="foto">
+  <input id="endereco" placeholder="Endereço">
 
-<button onclick="cadastrar()">Cadastrar</button>
+  <input id="telefone" placeholder="Telefone">
+
+  <input id="email" placeholder="Email">
+
+  <input id="contatodeEmergencia" placeholder="Contato de Emergência">
+
+  <select id="tipo">
+    <option>Convênio</option>
+    <option>Particular</option>
+  </select>
+
+  <input type="file" id="foto">
+
+
+  <!-- =============================== -->
+  <!--       ALTA DO PACIENTE          -->
+  <!-- =============================== -->
+
+  <h2>Alta do Paciente</h2>
+
+  <label for="dataAlta">Data da Alta</label>
+  <input id="dataAlta" type="date">
+
+  <label for="horaAlta">Hora da Alta</label>
+  <input id="horaAlta" type="time">
+
+  <label for="motivoAlta">Motivo da Alta</label>
+  <select id="motivoAlta">
+    <option value="">Selecione o motivo da alta</option>
+    <option value="cura">Cura</option>
+    <option value="melhora">Melhora do paciente</option>
+    <option value="alta_medica">Alta médica</option>
+    <option value="alta_a_pedido">Alta a pedido</option>
+    <option value="transferencia">Transferência para outra unidade</option>
+    <option value="encaminhamento">Encaminhamento para outro serviço</option>
+    <option value="abandono">Abandono do tratamento</option>
+    <option value="obito">Óbito</option>
+    <option value="outro">Outro</option>
+  </select>
+
+  <label for="condicaoAlta">Condição do Paciente na Alta</label>
+  <select id="condicaoAlta">
+    <option value="">Selecione a condição</option>
+    <option value="estavel">Estável</option>
+    <option value="melhorado">Melhorado</option>
+    <option value="sem_alteracao">Sem alteração</option>
+    <option value="necessita_acompanhamento">Necessita de acompanhamento</option>
+    <option value="transferido">Transferido</option>
+  </select>
+
+  <label for="observacoesAlta">Observações da Alta</label>
+  <textarea
+    id="observacoesAlta"
+    placeholder="Digite as observações referentes à alta do paciente"
+    rows="5">
+  </textarea>
+
+
+  <!-- =============================== -->
+  <!--             BOTÃO                -->
+  <!-- =============================== -->
+
+  <button onclick="cadastrar()">Cadastrar</button>
+
 </div>
 
-<script>
-function cadastrar(){
-fetch("http://localhost:3000/atendimento", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    nome: document.getElementById("nome").value,
-    documento: document.getElementById("documento").value,
-    datadeNascimento: document.getElementById("datadeNascimento").value,
-    sexo: document.getElementById("sexo").value,
-    nomeMae: document.getElementById("nomeMae").value,
-    estadoCivil: document.getElementById("estadoCivil").value,
-    endereco: document.getElementById("endereco").value,
-    telefone: document.getElementById("telefone").value,
-    email: document.getElementById("email").value,
-    contatodeEmergencia: document.getElementById("contatodeEmergencia").value,
-    tipo: document.getElementById("tipo").value,
 
-    // ADICIONADO: MOTIVO DA ALTA
-    motivoAlta: document.getElementById("motivoAlta").value
+<script>
+
+function cadastrar(){
+
+  fetch("http://localhost:3000/atendimento", {
+
+    method: "POST",
+
+    headers: {
+      "Content-Type": "application/json"
+    },
+
+    body: JSON.stringify({
+
+      /* DADOS DO PACIENTE */
+
+      nome: document.getElementById("nome").value,
+
+      documento: document.getElementById("documento").value,
+
+      datadeNascimento:
+        document.getElementById("datadeNascimento").value,
+
+      sexo:
+        document.getElementById("sexo").value,
+
+      nomeMae:
+        document.getElementById("nomeMae").value,
+
+      estadoCivil:
+        document.getElementById("estadoCivil").value,
+
+      endereco:
+        document.getElementById("endereco").value,
+
+      telefone:
+        document.getElementById("telefone").value,
+
+      email:
+        document.getElementById("email").value,
+
+      contatodeEmergencia:
+        document.getElementById("contatodeEmergencia").value,
+
+      tipo:
+        document.getElementById("tipo").value,
+
+
+      /* =============================== */
+      /*       DADOS DA ALTA              */
+      /* =============================== */
+
+      dataAlta:
+        document.getElementById("dataAlta").value,
+
+      horaAlta:
+        document.getElementById("horaAlta").value,
+
+      motivoAlta:
+        document.getElementById("motivoAlta").value,
+
+      condicaoAlta:
+        document.getElementById("condicaoAlta").value,
+
+      observacoesAlta:
+        document.getElementById("observacoesAlta").value
+
+    })
+
   })
-})
-.then(r => r.json())
-.then(data => {
-  alert("Paciente enviado para triagem!");
-})
-.catch(err => {
-  console.error("Erro:", err);
-  alert("Erro ao cadastrar paciente.");
-});
+
+  .then(r => r.json())
+
+  .then(data => {
+
+    alert("Paciente enviado para triagem!");
+
+  })
+
+  .catch(err => {
+
+    console.error("Erro:", err);
+
+    alert("Erro ao cadastrar paciente.");
+
+  });
+
 }
+
 </script>
+
 </body>
 </html>
