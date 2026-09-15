@@ -1,679 +1,76 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Atendimento do Paciente</title>
-
-  <link rel="stylesheet" href="style.css">
-</head>
-
+<html>
+<head><link rel="stylesheet" href="style.css"></head>
 <body>
-
 <div class="container">
+<h2>Atendimento</h2>
 
-  <h2>Atendimento do Paciente</h2>
+<input id="nome" placeholder="nome completo">
+<input id="cpf" placeholder="CPF">
+<input id="datadeNascimento" type="date" placeholder="Data de datadeNascimento">
 
-  <!-- ========================= -->
-  <!-- DADOS DO PACIENTE -->
-  <!-- ========================= -->
-
-  <h3>Dados do Paciente</h3>
-
-  <input
-    id="nome"
-    type="text"
-    placeholder="Nome completo"
-    required
-  >
-
-  <input
-    id="cpf"
-    type="text"
-    placeholder="CPF"
-    maxlength="14"
-    required
-  >
-
-  <input
-    id="datadeNascimento"
-    type="date"
-    required
-  >
-
-  <select id="sexo" required>
-    <option value="">Selecione o Sexo</option>
-    <option value="M">Masculino</option>
+<select id="sexo">
+  <option value="">Selecione o Sexo</option>
+  <option value="M">Masculino</option>
     <option value="F">Feminino</option>
-    <option value="O">Outro</option>
-  </select>
+  <option value="O">Outro</option>
+</select>
 
-  <input
-    id="nomeMae"
-    type="text"
-    placeholder="Nome da mãe"
-    required
-  >
+<input id="nomeMae" type="text" placeholder="Nome da mãe">
+<select id="estadoCivil">
+  <option value="">Estado Civil</option>
+  <option value="solteiro">Solteiro(a)</option>
+  <option value="casado">Casado(a)</option>
+  <option value="divorciado">Divorciado(a)</option>
+  <option value="viuvo">Viúvo(a)</option>
+</select>
 
-  <select id="estadoCivil" required>
-    <option value="">Estado Civil</option>
-    <option value="solteiro">Solteiro(a)</option>
-    <option value="casado">Casado(a)</option>
-    <option value="divorciado">Divorciado(a)</option>
-    <option value="viuvo">Viúvo(a)</option>
-  </select>
+<input id="endereco" placeholder="Endereço">
+<input id="telefone" placeholder="Telefone">
+<input id="email" placeholder="Email">
+<input id="contatodeEmergencia" placeholder="Contato de Emergência">
 
-  <input
-    id="endereco"
-    type="text"
-    placeholder="Endereço"
-    required
-  >
+<select id="tipo">
+  <option>Convênio</option>
+  <option>Particular</option>
+</select>
 
-  <input
-    id="telefone"
-    type="tel"
-    placeholder="Telefone"
-    required
-  >
-
-  <input
-    id="email"
-    type="email"
-    placeholder="Email"
-  >
-
-  <input
-    id="contatodeEmergencia"
-    type="text"
-    placeholder="Contato de Emergência"
-  >
-
-  <select id="tipo" required>
-    <option value="">Tipo de Atendimento</option>
-    <option value="Convenio">Convênio</option>
-    <option value="Particular">Particular</option>
-  </select>
-
-  <!-- FOTO -->
-
-  <label for="foto">Foto do Paciente</label>
-
-  <input
-    type="file"
-    id="foto"
-    accept="image/*"
-  >
-
-
-  <!-- ========================= -->
-  <!-- ALTA DO PACIENTE -->
-  <!-- ========================= -->
-
-  <h3>Alta do Paciente</h3>
-
-  <label for="dataAlta">Data da Alta</label>
-
-  <input
-    id="dataAlta"
-    type="date"
-  >
-
-
-  <label for="horaAlta">Hora da Alta</label>
-
-  <input
-    id="horaAlta"
-    type="time"
-  >
-
-
-  <label for="motivoAlta">Motivo da Alta</label>
-
-  <select id="motivoAlta">
-
-    <option value="">
-      Selecione o motivo da alta
-    </option>
-
-    <option value="cura">
-      Cura
-    </option>
-
-    <option value="melhora">
-      Melhora do paciente
-    </option>
-
-    <option value="alta_medica">
-      Alta médica
-    </option>
-
-    <option value="alta_a_pedido">
-      Alta a pedido
-    </option>
-
-    <option value="transferencia">
-      Transferência para outra unidade
-    </option>
-
-    <option value="encaminhamento">
-      Encaminhamento para outro serviço
-    </option>
-
-    <option value="abandono">
-      Abandono do tratamento
-    </option>
-
-    <option value="obito">
-      Óbito
-    </option>
-
-    <option value="outro">
-      Outro
-    </option>
-
-  </select>
-
-
-  <label for="condicaoAlta">
-    Condição do Paciente na Alta
-  </label>
-
-  <select id="condicaoAlta">
-
-    <option value="">
-      Selecione a condição
-    </option>
-
-    <option value="estavel">
-      Estável
-    </option>
-
-    <option value="melhorado">
-      Melhorado
-    </option>
-
-    <option value="sem_alteracao">
-      Sem alteração
-    </option>
-
-    <option value="necessita_acompanhamento">
-      Necessita de acompanhamento
-    </option>
-
-    <option value="transferido">
-      Transferido
-    </option>
-
-  </select>
-
-
-  <label for="observacoesAlta">
-    Observações da Alta
-  </label>
-
-  <textarea
-    id="observacoesAlta"
-    rows="5"
-    placeholder="Digite as observações referentes à alta do paciente"
-  ></textarea>
-
-
-  <!-- ========================= -->
-  <!-- BOTÃO -->
-  <!-- ========================= -->
-
-  <button
-    type="button"
-    onclick="cadastrar()"
-  >
-    Cadastrar
-  </button>
-
+<input type="file" id="foto">
+<button onclick="cadastrar()">Cadastrar</button>
 </div>
 
-
 <script>
-
-/* ==========================================
-   MÁSCARA DO CPF
-   ========================================== */
-
-document.getElementById("cpf").addEventListener("input", function () {
-
-  let cpf = this.value.replace(/\D/g, "");
-
-  cpf = cpf.substring(0, 11);
-
-  if (cpf.length > 9) {
-
-    cpf = cpf.replace(
-      /(\d{3})(\d{3})(\d{3})(\d{1,2})/,
-      "$1.$2.$3-$4"
-    );
-
-  } else if (cpf.length > 6) {
-
-    cpf = cpf.replace(
-      /(\d{3})(\d{3})(\d{1,3})/,
-      "$1.$2.$3"
-    );
-
-  } else if (cpf.length > 3) {
-
-    cpf = cpf.replace(
-      /(\d{3})(\d{1,3})/,
-      "$1.$2"
-    );
-
-  }
-
-  this.value = cpf;
-
+function cadastrar(){
+fetch("http://localhost:3000/atendimento", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    nome: document.getElementById("nome").value,
+    documento: document.getElementById("documento").value,
+    datadeNascimento: document.getElementById("datadeNascimento").value,
+    sexo: document.getElementById("sexo").value,
+    nomeMae: document.getElementById("nomeMae").value,
+    estadoCivil: document.getElementById("estadoCivil").value,
+    endereco: document.getElementById("endereco").value,
+    telefone: document.getElementById("telefone").value,
+    email: document.getElementById("email").value,
+    contatodeEmergencia: document.getElementById("contatodeEmergencia").value,
+    tipo: document.getElementById("tipo").value
+  })
+})
+.then(r => r.json())
+.then(data => {
+  alert("Paciente enviado para triagem!");
+})
+.catch(err => {
+  console.error("Erro:", err);
+  alert("Erro ao cadastrar paciente.");
 });
-
-
-/* ==========================================
-   MÁSCARA DO TELEFONE
-   ========================================== */
-
-document.getElementById("telefone").addEventListener("input", function () {
-
-  let telefone = this.value.replace(/\D/g, "");
-
-  telefone = telefone.substring(0, 11);
-
-  if (telefone.length > 10) {
-
-    telefone = telefone.replace(
-      /(\d{2})(\d{5})(\d{1,4})/,
-      "($1) $2-$3"
-    );
-
-  } else if (telefone.length > 6) {
-
-    telefone = telefone.replace(
-      /(\d{2})(\d{4})(\d{1,4})/,
-      "($1) $2-$3"
-    );
-
-  } else if (telefone.length > 2) {
-
-    telefone = telefone.replace(
-      /(\d{2})(\d{1,5})/,
-      "($1) $2"
-    );
-
-  }
-
-  this.value = telefone;
-
-});
-
-
-/* ==========================================
-   CADASTRAR PACIENTE
-   ========================================== */
-
-async function cadastrar() {
-
-  try {
-
-    /* ------------------------------
-       PEGAR OS DADOS
-       ------------------------------ */
-
-    const nome =
-      document.getElementById("nome").value.trim();
-
-    const cpf =
-      document.getElementById("cpf").value.trim();
-
-    const datadeNascimento =
-      document.getElementById("datadeNascimento").value;
-
-    const sexo =
-      document.getElementById("sexo").value;
-
-    const nomeMae =
-      document.getElementById("nomeMae").value.trim();
-
-    const estadoCivil =
-      document.getElementById("estadoCivil").value;
-
-    const endereco =
-      document.getElementById("endereco").value.trim();
-
-    const telefone =
-      document.getElementById("telefone").value.trim();
-
-    const email =
-      document.getElementById("email").value.trim();
-
-    const contatodeEmergencia =
-      document.getElementById("contatodeEmergencia").value.trim();
-
-    const tipo =
-      document.getElementById("tipo").value;
-
-
-    /* ------------------------------
-       DADOS DA ALTA
-       ------------------------------ */
-
-    const dataAlta =
-      document.getElementById("dataAlta").value;
-
-    const horaAlta =
-      document.getElementById("horaAlta").value;
-
-    const motivoAlta =
-      document.getElementById("motivoAlta").value;
-
-    const condicaoAlta =
-      document.getElementById("condicaoAlta").value;
-
-    const observacoesAlta =
-      document.getElementById("observacoesAlta").value.trim();
-
-
-    /* ------------------------------
-       FOTO
-       ------------------------------ */
-
-    const foto =
-      document.getElementById("foto").files[0];
-
-
-    /* ==========================================
-       VALIDAÇÕES
-       ========================================== */
-
-    if (!nome) {
-
-      alert("Digite o nome completo do paciente.");
-
-      return;
-    }
-
-
-    if (!cpf) {
-
-      alert("Digite o CPF do paciente.");
-
-      return;
-    }
-
-
-    if (!datadeNascimento) {
-
-      alert("Informe a data de nascimento.");
-
-      return;
-    }
-
-
-    if (!sexo) {
-
-      alert("Selecione o sexo.");
-
-      return;
-    }
-
-
-    if (!nomeMae) {
-
-      alert("Digite o nome da mãe.");
-
-      return;
-    }
-
-
-    if (!estadoCivil) {
-
-      alert("Selecione o estado civil.");
-
-      return;
-    }
-
-
-    if (!endereco) {
-
-      alert("Digite o endereço.");
-
-      return;
-    }
-
-
-    if (!telefone) {
-
-      alert("Digite o telefone.");
-
-      return;
-    }
-
-
-    if (!tipo) {
-
-      alert("Selecione o tipo de atendimento.");
-
-      return;
-    }
-
-
-    /* ==========================================
-       FORM DATA
-       ========================================== */
-
-    const formData = new FormData();
-
-
-    /* DADOS DO PACIENTE */
-
-    formData.append("nome", nome);
-
-    formData.append("cpf", cpf);
-
-    formData.append(
-      "datadeNascimento",
-      datadeNascimento
-    );
-
-    formData.append("sexo", sexo);
-
-    formData.append("nomeMae", nomeMae);
-
-    formData.append(
-      "estadoCivil",
-      estadoCivil
-    );
-
-    formData.append(
-      "endereco",
-      endereco
-    );
-
-    formData.append(
-      "telefone",
-      telefone
-    );
-
-    formData.append(
-      "email",
-      email
-    );
-
-    formData.append(
-      "contatodeEmergencia",
-      contatodeEmergencia
-    );
-
-    formData.append(
-      "tipo",
-      tipo
-    );
-
-
-    /* DADOS DA ALTA */
-
-    formData.append(
-      "dataAlta",
-      dataAlta
-    );
-
-    formData.append(
-      "horaAlta",
-      horaAlta
-    );
-
-    formData.append(
-      "motivoAlta",
-      motivoAlta
-    );
-
-    formData.append(
-      "condicaoAlta",
-      condicaoAlta
-    );
-
-    formData.append(
-      "observacoesAlta",
-      observacoesAlta
-    );
-
-
-    /* FOTO */
-
-    if (foto) {
-
-      formData.append(
-        "foto",
-        foto
-      );
-
-    }
-
-
-    /* ==========================================
-       ENVIAR PARA O SERVIDOR
-       ========================================== */
-
-    const resposta = await fetch(
-      "http://localhost:3000/atendimento",
-      {
-        method: "POST",
-        body: formData
-      }
-    );
-
-
-    /* ==========================================
-       VERIFICAR RESPOSTA
-       ========================================== */
-
-    if (!resposta.ok) {
-
-      throw new Error(
-        "Erro HTTP: " + resposta.status
-      );
-
-    }
-
-
-    const data = await resposta.json();
-
-
-    console.log(
-      "Resposta do servidor:",
-      data
-    );
-
-
-    alert(
-      "Paciente cadastrado com sucesso!"
-    );
-
-
-    /* ==========================================
-       LIMPAR FORMULÁRIO
-       ========================================== */
-
-    document.getElementById("nome").value = "";
-
-    document.getElementById("cpf").value = "";
-
-    document.getElementById(
-      "datadeNascimento"
-    ).value = "";
-
-    document.getElementById("sexo").value = "";
-
-    document.getElementById("nomeMae").value = "";
-
-    document.getElementById(
-      "estadoCivil"
-    ).value = "";
-
-    document.getElementById(
-      "endereco"
-    ).value = "";
-
-    document.getElementById(
-      "telefone"
-    ).value = "";
-
-    document.getElementById(
-      "email"
-    ).value = "";
-
-    document.getElementById(
-      "contatodeEmergencia"
-    ).value = "";
-
-    document.getElementById("tipo").value = "";
-
-    document.getElementById("foto").value = "";
-
-    document.getElementById(
-      "dataAlta"
-    ).value = "";
-
-    document.getElementById(
-      "horaAlta"
-    ).value = "";
-
-    document.getElementById(
-      "motivoAlta"
-    ).value = "";
-
-    document.getElementById(
-      "condicaoAlta"
-    ).value = "";
-
-    document.getElementById(
-      "observacoesAlta"
-    ).value = "";
-
-
-  } catch (erro) {
-
-    console.error(
-      "Erro ao cadastrar:",
-      erro
-    );
-
-    alert(
-      "Erro ao cadastrar paciente. " +
-      "Verifique se o servidor está funcionando."
-    );
-
-  }
-
 }
-
 </script>
-
 </body>
 </html>
+
+adicione o motivo da alta do pasciente sem mudar o codigo
