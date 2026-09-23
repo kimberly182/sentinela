@@ -106,8 +106,7 @@ app.post("/atendimento", (req, res) => {
 
     estadoCivil:
       req.body.estadoCivil || "",
-
-
+    
     // DADOS MÉDICOS
     tipoSanguineo:
       req.body.tipoSanguineo || "",
@@ -127,7 +126,6 @@ app.post("/atendimento", (req, res) => {
     observacoes:
       req.body.observacoes || "",
 
-
     // CONTATO
     endereco:
       req.body.endereco || "",
@@ -146,23 +144,17 @@ app.post("/atendimento", (req, res) => {
     tipo:
       req.body.tipo || "",
 
-
     // STATUS
     status: "triagem",
-
     createdAt: new Date()
 
   };
 
-
   db.pacientes.push(paciente);
-
   writeDB(db);
-
   res.json(paciente);
 
 });
-
 
 // ==================================================
 // LISTAR PACIENTES
@@ -176,7 +168,6 @@ app.get("/pacientes", (req, res) => {
 
 });
 
-
 // ==================================================
 // TRIAGEM
 // ==================================================
@@ -184,9 +175,7 @@ app.get("/pacientes", (req, res) => {
 app.post("/triagem", (req, res) => {
 
   const db = readDB();
-
   let risco = req.body.risco;
-
 
   if (req.body.temperatura >= 39) {
 
@@ -206,9 +195,7 @@ app.post("/triagem", (req, res) => {
 
   }
 
-
   const triagem = {
-
     id: Date.now(),
 
     nome:
@@ -227,47 +214,38 @@ app.post("/triagem", (req, res) => {
       req.body.observacao || "",
 
     risco,
-
+    
     status: "aguardando_medico",
-
+    
     createdAt: new Date()
 
   };
 
-
   db.triagens.push(triagem);
-
   writeDB(db);
-
   res.json(triagem);
 
 });
-
 
 // ==================================================
 // LISTAR TRIAGENS
 // ==================================================
 
 app.get("/triagens", (req, res) => {
-
   const db = readDB();
-
   res.json(db.triagens);
 
 });
 
-
 // ==================================================
 // MÍDIA INDOOR - TV
 // ==================================================
-
 
 // CHAMAR PACIENTE
 
 app.post("/tv/chamar", (req, res) => {
 
   const db = readDB();
-
   const chamada = {
 
     id: Date.now().toString(),
@@ -280,7 +258,7 @@ app.post("/tv/chamar", (req, res) => {
 
     paciente:
       req.body.paciente,
-
+    
     hora:
       new Date().toLocaleTimeString(
         "pt-BR",
@@ -292,25 +270,19 @@ app.post("/tv/chamar", (req, res) => {
 
   };
 
-
   db.tv_chamada = chamada;
 
   db.tv_historico.unshift(chamada);
 
-
   if (db.tv_historico.length > 5) {
-
     db.tv_historico.pop();
 
   }
 
-
   writeDB(db);
-
   res.json(chamada);
 
 });
-
 
 // CONSULTAR CHAMADA ATUAL
 
@@ -329,7 +301,6 @@ app.get("/tv/chamada", (req, res) => {
   });
 
 });
-
 
 // ==================================================
 // LISTA DE MEDICAÇÕES
@@ -354,7 +325,6 @@ app.get("/lista-medicacoes", (req, res) => {
 
 });
 
-
 // ==================================================
 // CONSULTA MÉDICA
 // ==================================================
@@ -362,7 +332,6 @@ app.get("/lista-medicacoes", (req, res) => {
 app.post("/consulta", (req, res) => {
 
   const db = readDB();
-
   const consulta = {
 
     id: Date.now(),
@@ -380,18 +349,13 @@ app.post("/consulta", (req, res) => {
       req.body.obs || "",
 
     createdAt: new Date()
-
   };
 
-
   db.consultas.push(consulta);
-
   writeDB(db);
-
   res.json(consulta);
 
 });
-
 
 // ==================================================
 // MEDICAÇÕES / CONSULTAS
@@ -405,14 +369,12 @@ app.get("/medicacoes", (req, res) => {
 
 });
 
-
 // ==================================================
 // START
 // ==================================================
 
 const PORT =
   process.env.PORT || 3000;
-
 
 app.listen(PORT, () => {
 
@@ -421,4 +383,3 @@ app.listen(PORT, () => {
   );
 
 });
-
